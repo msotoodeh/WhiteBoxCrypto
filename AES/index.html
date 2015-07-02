@@ -1,0 +1,247 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>KryptoPlus White-box Demo</title>
+		<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+		<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/style.css" />
+	</head> 
+	<body>
+		<header class="body page-header">
+			<h1>KryptoPlus&trade; White-box</h1>
+			<small>True Security for the Real World</small>
+		</header>
+		<section class="body well">
+			<p><b><i>KryptoPlus&trade;</i></b> is raising the bar for white box cryptography. It uses innovative encoding and blinding techniques to secure the sensitive keys and state information during cryptographic operations. <b><i>Rolling-Blinds&trade;</i></b> (patent pending) is a process of splitting information throughout the code execution path in such a way that upon completion of the path output data is completed and delivered in normal encoding format.
+			<p>KryptoPlus white box crypto is not relying on obfuscation. We are making it avilable for environments that never existed before. In this demo, AES encryption algorithm is implemented in JavaScript and runs in your browser while its decryption routine is provided in Python and runs on the server.</p>
+			<p>In this demonstration we are using <code>DemoKey_encrypt</code> for both encryption of the commands as well as decryption of the responses while <code>DemoKey_decrypt</code> in the server side is used for both decryption of commands and encryption of the responses. Whith this sort of designs, we are using symmetric keys in asymmetric fashion.</p>
+			<p>You are invited to have a look at the code and evaluate it for yourself. Can you break it?.</p>
+			<p>For more info contact: info@kryptoplus.com</p>
+		</section>
+		<section class="body">
+    		<form id="demo-form" action="#" method="get" role="form">
+    			<table class="demo-table">
+    				<thead>
+    					<tr>
+    						<th style="width:399px">Browser</th>
+    						<th style="width:52px"></th>
+    						<th style="width:399px;">Server</th>
+    					</tr>
+    				</thead>
+    				<tbody>
+    					<tr>
+    						<td>
+								<div class="form-group input-group pt1-form-group">
+									<input type="text" class="form-control" name="msg" placeholder="Loading..." id="msg-box" maxlength="16" readonly />
+									<input type="text" class="form-control" name="pt_hex" placeholder="Hex" id="pt-hex-box" readonly />
+								</div>
+								<div class="alert alert-info"><strong>Encrypt command using <code>DemoKey_encrypt.js</code></strong></div>
+								<div class="arrow-container">
+									<img src="images/down_arrow.png" width="32" height="32" />
+								</div>
+							</td>
+							<td></td>
+							<td colspan="1">
+								<div class="triangle-border left" id="caption-step1">1. The message you enter here will be encrypted in the browser using KryptoPlus White box JavaScript library <code>DemoKey_encrypt.js</code>. The encypted message will appear in the "Encrypted Command" field in hex.</div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="form-group input-group ct-form-group">
+									<label for="ct-hex-box">Encrypted Command:</label>
+									<input type="text" class="form-control" name="ct_hex" placeholder="Hex" id="ct-hex-box" readonly />
+									<button id="submit-btn" disabled="disabled" class="btn btn-primary btn-block">Submit</button>
+								</div>
+								<div class="triangle-border top" id="caption-step2">2. Click the "Submit" button to send the "<i>Encrypted Command</i>" to the server, where it will be decrypted using the KryptoPlus White box Python library <code>DemoKey_decrypt.py</code>.</div>
+							</td>
+							<td style="padding-top:40px">
+								<img src="images/right_arrow.png" width="32" height="32" />
+							</td>
+							<td>
+								<label for="pt-box">&nbsp;</label>
+								<div class="alert alert-info"><strong>Decrypt command using <code>DemoKey_decrypt.py</code></strong></div>
+								<div class="alert alert-info"><strong>response = UpperCase( input )</strong></div>
+								<div class="alert alert-info"><strong>Encrypt response using <code>DemoKey_decrypt.py</code></strong></div>
+								<div class="arrow-container">
+									<img src="images/down_arrow.png" width="32" height="32" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label>&nbsp;</label>
+								<div class="alert alert-info"><strong>Decrypt response using <code>DemoKey_encrypt.js</code></strong></div>
+								<div class="arrow-container">
+									<img src="images/down_arrow.png" width="32" height="32" />
+								</div>
+								<div class="form-group input-group pt2-form-group">
+									<label for="pt-box">Server Response:</label>
+									<input type="text" class="form-control" name="pt_hex_decrypted" placeholder="Hex" id="Text1" readonly />
+									<input type="text" class="form-control" name="pt_decrypted" placeholder="Text" id="pt-box" readonly />
+								</div>
+							</td>
+							<td style="padding-top:38px">
+								<img src="images/left_arrow.png" width="32" height="32" />
+							</td>
+							<td>
+								<div class="form-group input-group pt2-form-group">
+									<label for="pt-hex-box2">Encrypted response:</label>
+									<input type="text" class="form-control" name="resp_hex_encrypted" placeholder="Hex" id="resp_hex" readonly />
+								<div class="triangle-border top" id="caption-step3">Client command is decrypted using <code>DemoKey_decrypt.py</code> and then processed. Generated response (upper-case) will be encrypted using <code>DemoKey_decrypt.py</code> and then sent to the browser, where it is decrypted using <code>DemoKey_encrypt.js</code> and displayed as hex and text.</div>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<ul>
+									<li>Your secret key is not exposed here.</li>
+									<li>Secure messaging without exposing the key.</li>
+									<li>Can validate server authenticity.</li>
+								</ul>
+							</td>
+							<td></td>
+							<td>
+								<ul>
+									<li>Safeguard against insider threats.</li>
+									<li>Only server can decrypt commands.</li>
+									<li>Only server can generate encrypted responses.</li>
+								</ul>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<input type="submit" style="display:none" />
+			</form>
+    	</section>
+    	<footer class="body">
+    		<p>&copy; 2013 Kryptologik, LLC</p>
+    	</footer>
+    	<script type="text/javascript" src="js/DemoKey_encrypt.js"></script>
+    	<script type="text/javascript">
+    	var $form = $('#demo-form');
+    	var $msgField = $(':input[name="msg"]', $form);
+    	var $encryptBtn = $('#encrypt-btn');
+    	var $submitBtn = $('#submit-btn');
+
+    	function stringToBytes(str, padToSize) {
+    		var i, ba = Array();
+    		for (i = 0; i < str.length; i++) {
+    			ba.push(str.charCodeAt(i));
+    		}
+
+    		while (padToSize > ba.length) {
+    			ba.push(0);
+    		}
+
+    		return ba;
+    	}
+
+    	function bytesToString(ba) {
+    		var i, str = '';
+    		for (var i = 0; i < ba.length; i++) {
+    			str += String.fromCharCode(ba[i]);
+    		}
+
+    		return str;
+    	}
+
+    	function bytesToHex(ba) {
+    		var i, hexStr = '';
+
+    		for (i = 0; i < ba.length; i++) {
+    			var hexVal = ba[i].toString(16);
+    			hexStr += hexVal.length < 2 ? '0' + hexVal : hexVal;
+    		}
+
+    		return hexStr.toUpperCase();
+    	}
+
+    	function hexToString(hexStr) {
+    		var i, str ='';
+
+    		for (i = 0; i < hexStr.length; i += 2) {
+    			var charCode = parseInt(hexStr.substring(i, i + 2), 16);
+    			str += String.fromCharCode(charCode);
+    		}
+
+    		return str;
+    	}
+
+    	var doEncrypt = function(e) {
+			var pt = $msgField.val();
+			var dataIn = stringToBytes(pt, 16);
+			var ct = DemoKey_encrypt(dataIn);
+
+			$(':input[name="pt_hex"]', $form).val(bytesToHex(dataIn));
+			$(':input[name="ct_hex"]', $form).val(bytesToHex(ct));
+			$(':input[name="resp_hex_encrypted"]', $form).val('');
+			$(':input[name="pt_hex_decrypted"]', $form).val('');
+			$(':input[name="pt_decrypted"]', $form).val('');
+
+			$submitBtn.attr('disabled', pt.length<1);
+			
+    		return false;
+		};
+
+		var doDecrypt = function(e) {
+			var ct = $(':input[name="ct_hex"]', $form).val();
+			if (ct != '') {
+				$.ajax({
+					url: 'http://kryptologik.com/demo/decrypt.php',
+					type: 'post',
+					data: { ct: ct },
+					success: function(data) {
+						if (data['result'] == 'SUCCESS') {
+							var enRspHex = data['pt'];
+							$(':input[name="resp_hex_encrypted"]', $form).val(enRspHex);
+                            /* Server decrypts the message and changes it to uppercase, 
+                               encrypts it using decrypt operation and sends it to client
+                               client is supposed to call encrypt on the returned data to actually decrypt it */
+                            var ptBytes = DemoKey_encrypt(stringToBytes(hexToString(enRspHex), 16));
+                            var ptHex = bytesToHex(ptBytes);
+							$(':input[name="pt_hex_decrypted"]', $form).val(ptHex);
+							var ptStr = hexToString(ptHex);
+							$(':input[name="pt_decrypted"]', $form).val(ptStr);
+							/*if (ptHex == $(':input[name="pt_hex"]', $form).val()) {
+								$(':input[name="pt_decrypted"]', $form).parents('div.form-group').addClass('has-success');
+							}*/
+						} else {
+							alert('error');
+						}
+					}
+				});
+			}
+
+			return false;
+		};
+		$(document).ready(function() {
+			$msgField.attr({
+				'placeholder': 'Enter a message here (16 characters max)',
+				'readonly': false
+			});
+		});
+    	$(function() {
+    		$msgField.keyup(function(e) {
+    			var code = e.keyCode || e.which;
+
+				if (code !== 13) {
+	    			if ($msgField.val().length > 0) {
+	    				$encryptBtn.attr('disabled', false);
+	    			} else {
+	    				$encryptBtn.attr('disabled', true);
+	    			}
+
+	    			doEncrypt(e);
+	    		} else {
+	    			$form.submit();
+	    		}
+    		});
+
+    		$encryptBtn.click(doEncrypt);
+    		$submitBtn.click(doDecrypt);
+    		$form.submit(doDecrypt);
+    	});
+    	</script>
+	</body>
+</html>
