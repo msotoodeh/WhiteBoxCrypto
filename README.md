@@ -15,8 +15,8 @@ Using KryptoPlus provides you with:
 
 Following algorithms are covered currently:
 
-1. AES 128/192/256 [demo](http://kryptologik.com/demo/)
-2. ARIA 128/192/256 [demo](http://kryptologik.com/demo/aria/)
+1. AES 128/192/256 (demo: wb-aes-xchange.gif)
+2. ARIA 128/192/256
 3. FPE (Format Preserving Encryption)
 
 KryptoPlus tools generate unique code for the given algorithm and key. It currently generates code for C/C++, JavaScript, Python and C-sharp.
